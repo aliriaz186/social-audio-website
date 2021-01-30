@@ -60,7 +60,7 @@ Route::get('/unsubscribe/{id}', "UserController@unsubscribe");
 Route::get('/like-audio/{id}', "UserController@likeAudio");
 Route::get('/save-audio/{id}', "UserController@saveAudio");
 Route::get('/notifications', "UserController@notifications");
-Route::get('/record-live', "UserController@recordLive");
+Route::get('/broadcasting', "UserController@recordLive");
 Route::post('/editchannelbackend', "UserController@editchannelbackend");
 Route::post('/uploadupdatedaudio', "UserController@uploadupdatedaudio");
 Route::post('/uploadaudio', "UserController@uploadaudio");
