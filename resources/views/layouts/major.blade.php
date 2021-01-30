@@ -104,12 +104,12 @@
                 <span>Saved Audio</span>
             </a>
         </li>
-        <li class="nav-item {{url()->current() == url('/broadcasting') ? 'active' : ''}}">
-            <a class="nav-link"  href="{{url('broadcasting')}}">
-                <i class="fas fa-fw fa-broadcast-tower"></i>
-                <span>Broadcasting</span>
-            </a>
-        </li>
+{{--        <li class="nav-item {{url()->current() == url('/broadcasting') ? 'active' : ''}}">--}}
+{{--            <a class="nav-link"  href="{{url('broadcasting')}}">--}}
+{{--                <i class="fas fa-fw fa-broadcast-tower"></i>--}}
+{{--                <span>Broadcasting</span>--}}
+{{--            </a>--}}
+{{--        </li>--}}
         <li class="nav-item channel-sidebar-list">
             <h6>SUBSCRIPTIONS</h6>
             <ul>
