@@ -21,6 +21,7 @@ class CreateAudioTable extends Migration
             $table->string('privacy');
             $table->string('audio');
             $table->string('audio_photo');
+            $table->string('category')->default('music');
             $table->string('description')->nullable();
             $table->timestamps();
         });

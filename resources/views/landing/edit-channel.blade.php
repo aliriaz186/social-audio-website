@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Name</label>
-                                <input value="{{$channel->name}}" type="text" class="form-control" placeholder="Channel Name" name="name" required style="color: white">
+                                <input value="{{$channel->name}}" type="text" class="form-control" placeholder="Channel Name" name="name" required>
                                 <input value="{{$channel->id}}" type="hidden" class="form-control" name="channelId">
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Description</label>
-                                <textarea  class="form-control" placeholder="Describe your channel" name="description" style="color: white">{{$channel->description}}</textarea>
+                                <textarea  class="form-control" placeholder="Describe your channel" name="description" >{{$channel->description}}</textarea>
                             </div>
                         </div>
                     </div>

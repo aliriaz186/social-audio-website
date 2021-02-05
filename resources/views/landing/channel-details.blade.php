@@ -30,10 +30,10 @@
             <div class="upload-btn-resp">
                 @if(\App\SubscibedChannel::where('channel_id', $channel->id)->where('subscriber_id', \Illuminate\Support\Facades\Session::get('userId'))->exists())
                     <button class="btn btn-light" disabled>SUBSCRIBED</button>
-                    <a class="btn btn-danger" disabled style="margin-left: 5px;color: white" href="{{url('unsubscribe')}}/{{$channel->id}}">UNSUBSCRIBE</a>
+                    <a class="btn btn-danger" disabled style="margin-left: 5px;color: black" href="{{url('unsubscribe')}}/{{$channel->id}}">UNSUBSCRIBE</a>
 
                 @else
-                    <a class="btn btn-outline-success" style="color: white" href="{{url('subscribe')}}/{{$channel->id}}">SUBSCRIBE</a>
+                    <a class="btn btn-outline-success" style="color: black" href="{{url('subscribe')}}/{{$channel->id}}">SUBSCRIBE</a>
                 @endif
             </div>
             <div class="container-fluid">

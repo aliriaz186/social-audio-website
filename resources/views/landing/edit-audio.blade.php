@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Change Audio File</label>
-                                <input type="file" class="form-control" name="audio[]" style="color: white">
+                                <input type="file" class="form-control" name="audio[]" >
                                 <input type="hidden" class="form-control" name="audioId" value="{{$audio->id}}">
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Change Photo Associated with your Audio File</label>
-                                <input type="file" class="form-control" name="audioPhoto[]" style="color: white">
+                                <input type="file" class="form-control" name="audioPhoto[]" >
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Audio Title</label>
-                                <input type="text" class="form-control" value="{{$audio->title}}" placeholder="Audio Title" name="title" required style="color: white">
+                                <input type="text" class="form-control" value="{{$audio->title}}" placeholder="Audio Title" name="title" required>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Description</label>
-                                <textarea  class="form-control" placeholder="Describe your audio" name="description" style="color: white">{{$audio->description}}</textarea>
+                                <textarea  class="form-control" placeholder="Describe your audio" name="description">{{$audio->description}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -53,13 +53,28 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Change Privacy</label>
-                                <select class="form-control" name="privacy" style="color: white">
+                                <select class="form-control" name="privacy">
                                     <option {{$audio->privacy == 'public' ? 'selected' : ''}} value="public">Public</option>
                                     <option {{$audio->privacy == 'private' ? 'selected' : ''}} value="private">Private</option>
                                 </select>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <div class="input-with-icon">
+                                <label>Category</label>
+                                <select class="form-control" name="category">
+                                    <option {{$audio->category == 'music' ? 'selected' : ''}} value="music">Music</option>
+                                    <option {{$audio->category == 'podcasts' ? 'selected' : ''}} value="podcasts">Podcasts</option>
+                                    <option {{$audio->category == 'radios' ? 'selected' : ''}} value="radios">Radios</option>
+                                    <option {{$audio->category == 'playlists' ? 'selected' : ''}} value="playlists">Playlists</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-outline-success full-width pop-login">Update Audio</button>

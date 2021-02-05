@@ -6,7 +6,6 @@
             <h4>{{\Illuminate\Support\Facades\Session::get("msg")}}</h4>
         </div>
     @endif
-
     <div class="container-fluid">
         <div class="video-block section-padding">
             <div class="row">
@@ -14,33 +13,41 @@
                     <div class="main-title">
                         <h3>{{$audio->title}}</h3>
                         <p>{{$audio->description ?? ''}}</p>
-                        <p>By : <a href="{{url('channel-details')}}/{{$channel->id}}" style="color: white">{{$channel->name ?? ''}}</a></p>
+                        <p>Category : <span >{{$audio->category ?? ''}}</span></p>
+                        <p>By : <a href="{{url('channel-details')}}/{{$channel->id}}"
+                                  style="color: black;font-weight: bold" >{{$channel->name ?? ''}}</a></p>
+                        <div>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{url('')}}/audio-details/{{$audio->id}}"
+                               target="_blank" class="btn btn-outline-success">Share On
+                                Facebook</a>
+                            <a target="_blank"
+                               href="http://twitter.com/share?text=Checkout this Audio&url={{url('')}}/audio-details/{{$audio->id}}"
+                               class="btn btn-outline-success">Share On Twitter</a>
+                            <a target="_blank" href="https://wa.me/?text={{url('')}}/audio-details/{{$audio->id}}"
+                               class="btn btn-outline-success">Share On WhatsApp</a>
+                        </div>
                     </div>
                 </div>
-                    <div style="margin: 0 auto;max-width: 300px">
-                        <div class="video-card">
-                            <div class="video-card-image">
-                                <a><img src="{{url('/audio-photo')}}/{{$audio->id}}" style="height: 250px" alt=""></a>
-                            </div>
-                            <div class="video-card-body">
-
-                                <div class="video-view"><i class="fas fa-calendar-alt"></i> <?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($audio->created_at))->diffForHumans() ?>
-                                </div>
-
+                <div style="margin: 0 auto;max-width: 300px;margin-top: 20px">
+                    <div class="video-card">
+                        <div class="video-card-image">
+                            <a><img src="{{url('/audio-photo')}}/{{$audio->id}}" style="height: 250px" alt=""></a>
+                        </div>
+                        <div class="video-card-body">
+                            <div class="video-view"><i
+                                    class="fas fa-calendar-alt"></i> <?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($audio->created_at))->diffForHumans() ?>
                             </div>
                         </div>
                     </div>
-
-
+                </div>
             </div>
             <div style="margin: 0 auto;max-width: 300px;margin-top: 10px">
-                <audio controls >
+                <audio controls>
                     <source src="{{url('/audio-file')}}/{{$audio->id}}" type="audio/ogg">
                     <source src="{{url('/audio-file')}}/{{$audio->id}}" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
             </div>
-
         </div>
         @if(empty(\Illuminate\Support\Facades\Session::get('userId')))
         <div style="margin-top: 15px">
@@ -61,7 +68,7 @@
                     </div>
 {{--                    <button class="btn btn-info" style="color: white">LIKED</button>--}}
                 @else
-                    <a class="btn btn-outline-info" style="color: white" href="{{url('like-audio')}}/{{$audio->id}}">LIKE</a>
+                    <a class="btn btn-outline-info" href="{{url('like-audio')}}/{{$audio->id}}">LIKE</a>
 
                 @endif
                     @if($audioSaved == true)
@@ -75,7 +82,7 @@
                             </div>
                         </div>
                     @else
-                        <a class="btn btn-outline-info" style="color: white" href="{{url('save-audio')}}/{{$audio->id}}">SAVE</a>
+                        <a class="btn btn-outline-info" href="{{url('save-audio')}}/{{$audio->id}}">SAVE</a>
 
                     @endif
                 <br>
@@ -83,7 +90,7 @@
                 <div style="max-width: 350px;">
                     <form method="post" action="{{url('addcomment')}}">
                         @csrf
-                        <h4 style="color: white">Comment</h4><br>
+                        <h4 >Comment</h4><br>
                         <input type="text" class="form-control" name="comment" placeholder="write your comment" style="color: white;max-width: 350px">
                         <input type="hidden" class="form-control" name="audioId" value="{{$audio->id}}">
                         <br>
@@ -92,12 +99,12 @@
                 </div>
                 <h4 style="color: white;margin-top: 20px">Comments</h4>
                     @if(count($comments) == 0)
-                        <h5 style="color: white">No Comment Found!</h5>
+                        <h5 >No Comment Found!</h5>
                         @endif
                  @foreach($comments as $item)
-                <div style="padding: 10px; border: 2px solid white;max-width: 350px;border-radius: 8px;margin-bottom: 5px">
-                    <div  style="color: white;font-size: 18px">{{$item->comment}}</div>
-                    <div  style="color: white;float: right"><i class="fas fa-user"></i> {{\App\User::where('id', $item->user_id)->first()['name']}} | <i class="fas fa-calendar"></i> <?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($item->created_at))->diffForHumans() ?></div>
+                <div style="padding: 10px; border: 2px solid black;max-width: 350px;border-radius: 8px;margin-bottom: 5px">
+                    <div  style="font-size: 18px">{{$item->comment}}</div>
+                    <div  style="float: right"><i class="fas fa-user"></i> {{\App\User::where('id', $item->user_id)->first()['name']}} | <i class="fas fa-calendar"></i> <?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($item->created_at))->diffForHumans() ?></div>
                     <br>
                 </div>
                     @endforeach

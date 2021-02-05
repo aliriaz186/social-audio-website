@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Askbootstrap">
     <meta name="author" content="Askbootstrap">
-    <title>NINCATI</title>
+    <title>nincati</title>
 
     <link rel="icon" type="image/png" href="{{asset('small.jpg')}}">
 
@@ -19,12 +19,34 @@
 
     <link rel="stylesheet" href="{{asset('ui/vendor/owl-carousel/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{asset('ui/vendor/owl-carousel/owl.theme.css')}}">
+    <style>
+
+        @media only screen and (max-width: 600px) {
+            .pc-side-nav{
+                display: none!important;
+            }
+            .footer{
+                display: block!important;
+            }
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #252a30;
+            color: white;
+            text-align: center;
+            display: none;
+        }
+    </style>
 </head>
 <body id="page-top">
 <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
-    <button class="btn btn-link btn-sm text-secondary order-1 order-sm-0" id="sidebarToggle">
-        <i class="fas fa-bars"></i>
-    </button>
+{{--    <button class="btn btn-link btn-sm text-secondary order-1 order-sm-0" id="sidebarToggle">--}}
+{{--        <i class="fas fa-bars"></i>--}}
+{{--    </button>--}}
     <a href="{{url('/')}}" class="navbar-brand" href="#" style="color: white!important;margin-top: 5px;margin-left: 5px"><img src="{{asset('new-logo.png')}}" style="width: 150px;height: 50px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -56,6 +78,8 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="{{url('my-channel')}}">My Channel</a>
+                        <a class="dropdown-item" href="{{url('my-profile')}}">My Profile</a>
+                        <a class="dropdown-item" href="{{url('saved-audio')}}">Saved Audio</a>
                         <a class="dropdown-item" href="{{url('user-logout')}}">Logout</a>
                     </div>
                 </div>
@@ -67,7 +91,7 @@
 
 <div id="wrapper">
 
-    <ul class="sidebar navbar-nav">
+    <ul class="sidebar navbar-nav pc-side-nav">
         <li class="nav-item {{url()->current() == url('') ? 'active' : ''}}">
             <a class="nav-link" href="{{url('/')}}">
                 <i class="fas fa-fw fa-home"></i>
@@ -104,6 +128,12 @@
                 <span>Saved Audio</span>
             </a>
         </li>
+        <li class="nav-item {{url()->current() == url('/my-profile') ? 'active' : ''}}">
+            <a class="nav-link"  href="{{url('my-profile')}}">
+                <i class="fas fa-fw fa-user"></i>
+                <span>My Profile</span>
+            </a>
+        </li>
 {{--        <li class="nav-item {{url()->current() == url('/broadcasting') ? 'active' : ''}}">--}}
 {{--            <a class="nav-link"  href="{{url('broadcasting')}}">--}}
 {{--                <i class="fas fa-fw fa-broadcast-tower"></i>--}}
@@ -129,7 +159,7 @@
                         </li>
                     @endforeach
                 @else
-                            <li>
+                            <li style="color: white">
                               No Subscription Found
                             </li>
                 @endif
@@ -139,6 +169,8 @@
     <div id="content-wrapper">
         @yield('content')
     </div>
+
+
 
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -161,6 +193,48 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="footer">
+        <div class="d-flex">
+            <div>
+                <a class="nav-link" href="{{url('/')}}" style="color: white;">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span style="font-size: 12px">Home</span>
+                </a>
+            </div>
+            <div>
+                <a class="nav-link" href="{{url('/trendings')}}" style="color: white;">
+                    <i class="fas fa-fw fa-lightbulb"></i>
+                    <span  style="font-size: 12px">Trending</span>
+                </a>
+            </div>
+            <div>
+                <a class="nav-link"  href="{{url('/channels')}}" style="color: white;">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span  style="font-size: 12px">Channels</span>
+                </a>
+            </div>
+            <div>
+                <a class="nav-link" href="{{url('/my-channel')}}" style="color: white;">
+                    <i class="fas fa-fw fa-user-alt"></i>
+                    <span  style="font-size: 12px">Channel</span>
+                </a>
+            </div>
+            <div>
+                <a class="nav-link"  href="{{url('upload-audio')}}" style="color: white;">
+                    <i class="fas fa-fw fa-cloud-upload-alt"></i>
+                    <span  style="font-size: 12px">Upload</span>
+                </a>
+            </div>
+            {{--            <div>--}}
+            {{--                <a class="nav-link"  href="{{url('saved-audio')}}" style="color: white">--}}
+            {{--                    <i class="fas fa-fw fa-save"></i>--}}
+            {{--                    <span  style="font-size: 12px">Saved</span>--}}
+            {{--                </a>--}}
+            {{--            </div>--}}
+        </div>
+
     </div>
 
     <script src="{{asset('ui/vendor/jquery/jquery.min.js')}}" type="256d66aecf50d6d8425f9975-text/javascript"></script>

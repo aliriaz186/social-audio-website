@@ -56,7 +56,7 @@
                         </div>
                         @foreach($audio as $item)
                             <div class="col-xl-3 col-sm-6 mb-3">
-                                <a href="{{url('edit-audio')}}/{{$item->id}}" style="color: white">Edit</a>
+                                <a href="{{url('edit-audio')}}/{{$item->id}}" style="color: black;font-weight: bold">Edit</a>
                                 <div class="video-card">
                                     <div class="video-card-image">
                                         <a href="{{url('audio-details')}}/{{$item->id}}"><img src="{{url('/audio-photo')}}/{{$item->id}}" style="height: 250px" alt=""></a>

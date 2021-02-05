@@ -28,8 +28,8 @@ Version: 1.0
      min-height: 100%;
 }
  body {
-     background-color: #121212;
-     color: #888;
+     background-color: #FFFFFF;
+     color: black;
      font-size: 13px;
      height: 100%;
      font-family: 'Open Sans', sans-serif;
@@ -169,7 +169,7 @@ Version: 1.0
 }
  .sidebar {
      width: 90px !important;
-     background: #1c1c1c;
+     background: #282d32;
      min-height: 100%;
      z-index: 9;
      padding: 2px 0;
@@ -702,7 +702,7 @@ Version: 1.0
     text-decoration: none;
 }
  .form-control, .form-control:focus {
-    background: #1c1c1c none repeat scroll 0 0;
+    background: white none repeat scroll 0 0;
     border-color: #303030;
      border-radius: 2px;
      font-size: 13px;
@@ -765,7 +765,7 @@ Version: 1.0
 }
 
  a:hover, h1, h2, h3, h4, h5, h6 {
-     color: #fff;
+     color: black;
 }
  .upload-video .fas {
      font-size: 200px;
@@ -911,6 +911,7 @@ Version: 1.0
 }
  .video-card-body {
      padding: 12px;
+     background: #282d32;
 }
  .video-card-list .video-card-image {
      float: left;
@@ -1204,10 +1205,11 @@ Version: 1.0
         display: block;
     }
     #wrapper #content-wrapper .container-fluid {
-        padding-bottom: 15px !important;
-        padding-left: 108px;
-        padding-right: 15px !important;
-        padding-top: 1rem !important;
+        /*padding-bottom: 15px !important;*/
+        /*padding-left: 108px;*/
+        /*padding-right: 15px !important;*/
+        /*padding-top: 1rem !important;*/
+        padding: 15px!important;
     }
     .sidebar .nav-item .nav-link {
         padding: 8px 14px !important;

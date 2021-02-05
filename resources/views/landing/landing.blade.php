@@ -18,7 +18,7 @@
             <form action="{{url('search-audio')}}" method="post">
                 @csrf
                 <div style="margin: 0 auto;max-width: 500px">
-                    <input type="text" class="form-control" style="color: white;display: inline!important;" placeholder="type here and hit the ENTER key or Search button" name="audioTitle">
+                    <input type="text" class="form-control" style="color: black;display: inline!important;" placeholder="type here and hit the ENTER key or Search button" name="audioTitle">
                     <button class="btn btn-outline-success" style="display: inline;margin-top: 10px">SEARCH</button>
                 </div>
             </form>

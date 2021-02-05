@@ -6,7 +6,7 @@
         <div class="text-center mb-5 login-main-left-header pt-4">
             <h4 class="mt-3 mb-3">Welcome to nincati</h4>
         </div>
-        <h5 class="modal-header-title" style="margin-bottom: 10px">Login</h5>
+        <h5 class="modal-header-title" style="margin-bottom: 10px">Change Password</h5>
         @if($errors->any())
             <div class="alert alert-danger" >
                 <h4 style="color: black;font-size: 14px">{{$errors->first()}}</h4>
@@ -17,28 +17,28 @@
                 <h4 style="color: black">{{\Illuminate\Support\Facades\Session::get("msg")}}</h4>
             </div>
         @endif
-        <form method="post" action="{{url('userlogin')}}">
+        <form method="post" action="{{url('changepassword')}}">
             @csrf
+{{--            <div class="form-group">--}}
+{{--                <label>Email</label>--}}
+                <input type="hidden" class="form-control" placeholder="Enter Email" name="email" value="{{$email ?? ''}}">
+{{--            </div>--}}
             <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" placeholder="Enter Email" name="email">
+                <label>New Password</label>
+                <input type="password" class="form-control" placeholder="Enter password" name="password">
             </div>
             <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control"  placeholder="*******" name="password">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" placeholder="Confirm password" name="confirmpassword">
             </div>
             <div class="mt-4">
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-outline-success btn-block btn-lg">Sign In
+                        <button type="submit" class="btn btn-outline-success btn-block btn-lg">CHANGE PASSWORD
                         </button>
                     </div>
                 </div>
             </div>
         </form>
-        <div class="text-center mt-5">
-            <p class="light-gray"> <a style="color: green" href="{{url('forgot-password')}}" >Forgot your password?</a></p>
-            <p class="light-gray">Don’t have an account? <a style="color: green" href="{{url('user-signup')}}" >Sign Up</a></p>
-        </div>
     </div>
 @endsection

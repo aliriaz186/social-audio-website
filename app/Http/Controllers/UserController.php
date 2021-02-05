@@ -15,10 +15,22 @@ use App\ProfessionalProfileImage;
 use App\SavedAudio;
 use App\Staff;
 use App\SubscibedChannel;
+use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use services\email_messages\ForgotPasswordMessage;
+use services\email_messages\InvitationMessageBody;
+use services\email_messages\JobScheduleForCustomerMessage;
+use services\email_services\EmailAddress;
+use services\email_services\EmailBody;
+use services\email_services\EmailMessage;
+use services\email_services\EmailSender;
+use services\email_services\EmailSubject;
+use services\email_services\MailConf;
+use services\email_services\PhpMail;
+use services\email_services\SendEmailService;
 
 class UserController extends Controller
 {
@@ -61,6 +73,44 @@ class UserController extends Controller
 
     }
 
+    public function forgotpassword(Request $request){
+        try {
+            if (User::where(['email' => $request->email])->exists()) {
+                $subject = new SendEmailService(new EmailSubject("Forgot Password Email from nincati"));
+                $mailTo = new EmailAddress($request->email);
+                $invitationMessage = new ForgotPasswordMessage();
+                $token = JWT::encode($request->email, 'secret-2021');
+                $emailBody = $invitationMessage->invitationMessageBody($token);
+                $body = new EmailBody($emailBody);
+                $emailMessage = new EmailMessage($subject->getEmailSubject(), $mailTo, $body);
+                $sendEmail = new EmailSender(new PhpMail(new MailConf("smtp.gmail.com", "admin@dispatch.com", "secret-2021")));
+                $result = $sendEmail->send($emailMessage);
+                session()->flash('msg', 'Email Sent Successfully!');
+                return redirect()->back();
+            } else {
+                return redirect()->back()->withErrors(['Email not found in our database!']);
+            }
+        }catch (\Exception $exception){
+            return redirect()->back()->withErrors(['There is server error right now. Please try again later']);
+        }
+
+    }
+
+    public function resetpassword($token){
+
+        try {
+            $email = JWT::decode($token, 'secret-2021', array('HS256'));
+
+            if (empty($email)){
+                return json_encode("Access Denied");
+            }
+            return view('landing.change-password')->with(['email' => $email]);
+        }catch (\Exception $exception){
+            return redirect()->back()->withErrors(['There is server error right now. Please try again later']);
+        }
+
+    }
+
     public function signup(Request $request){
         try {
             if (empty($request->name) || empty($request->email) || empty($request->password)){
@@ -70,16 +120,70 @@ class UserController extends Controller
                 $user = new User();
                 $user->name = $request->name;
                 $user->email = $request->email;
-                $user->phone = $request->phone;
+                $user->phone = '+' . $request->countryCode . $request->phone;
                 $user->password = md5($request->password);
                 $user->save();
                 Session::put('userId', $user->id);
                 Session::remove('isAdmin');
+
+                $subject = new SendEmailService(new EmailSubject("Your account has been created on nincati"));
+                $mailTo = new EmailAddress($user->email);
+                $invitationMessage = new InvitationMessageBody();
+                $emailBody = $invitationMessage->invitationMessageBody();
+                $body = new EmailBody($emailBody);
+                $emailMessage = new EmailMessage($subject->getEmailSubject(), $mailTo, $body);
+                $sendEmail = new EmailSender(new PhpMail(new MailConf("smtp.gmail.com", "admin@dispatch.com", "secret-2021")));
+                $result = $sendEmail->send($emailMessage);
                 return redirect('');
 
             } else {
                 return redirect()->back()->withErrors(['Email Already Exists']);
             }
+        }catch (\Exception $exception){
+            return redirect()->back()->withErrors([$exception->getMessage()]);
+        }
+    }
+
+    public function myProfile(){
+        try {
+          if (Session::get('userId')){
+              $user = User::where('id', Session::get('userId'))->first();
+              return view('landing.my-profile')->with(['user' => $user]);
+          }else{
+              return view('landing.my-profile');
+          }
+        }catch (\Exception $exception){
+            return redirect()->back()->withErrors([$exception->getMessage()]);
+        }
+    }
+
+    public function updateProfile(Request $request){
+        try {
+          if (Session::get('userId')){
+              $user = User::where('id', Session::get('userId'))->first();
+              $user->name = ($request->name);
+              $user->phone = $request->phone;
+              $user->update();
+              session()->flash('msg', 'Profile Updated Successfully!');
+              return redirect('my-profile');
+          }else{
+              return view('landing.my-profile');
+          }
+        }catch (\Exception $exception){
+            return redirect()->back()->withErrors([$exception->getMessage()]);
+        }
+    }
+
+    public function changepassword(Request $request){
+        try {
+            if (empty($request->email) || empty($request->password) || ($request->password != $request->confirmpassword)){
+                return redirect()->back()->withErrors(['Invalid Inputs. Please provide valid info.']);
+            }
+                $user = User::where('email', $request->email)->first();
+                $user->password = md5($request->password);
+                $user->update();
+                session()->flash('msg', 'Password Changed Successfully!');
+                return redirect('user-login');
         }catch (\Exception $exception){
             return redirect()->back()->withErrors([$exception->getMessage()]);
         }
@@ -317,6 +421,7 @@ class UserController extends Controller
             $audio->title = $request->title;
             $audio->description = $request->description;
             $audio->privacy = $request->privacy;
+            $audio->category = $request->category;
             $audio->user_id = Session::get('userId');
             $audio->channel_id = Channel::where('user_id', $audio->user_id)->first()['id'];
             if ($request->hasfile('audio')) {
@@ -369,6 +474,7 @@ class UserController extends Controller
             $audio->title = $request->title;
             $audio->description = $request->description;
             $audio->privacy = $request->privacy;
+            $audio->category = $request->category;
             if ($request->hasfile('audio')) {
                 $files = $request->file('audio');
                 foreach ($files as $file) {

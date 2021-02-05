@@ -32,11 +32,16 @@ Route::get('/booking-complete/{id}', "BookingController@complete");
 
 Route::post('/userlogin', "UserController@login");
 Route::post('/usersignup', "UserController@signup");
+Route::post('/forgotpassword', "UserController@forgotpassword");
+Route::post('/updateprofile', "UserController@updateProfile");
 Route::post('/save-contactus', "UserController@saveContactus");
 Route::post('/save-professional-registration', "UserController@saveProfessionalRegistration");
 Route::post('/update-professional-registration', "UserController@updateProfessionalRegistration");
 Route::post('/update-customer-registration', "UserController@updateCustomerRegistration");
 Route::get('/user-logout', "UserController@logout");
+Route::get('/my-profile', "UserController@myProfile");
+Route::get('/reset-password/{token}', "UserController@resetpassword");
+Route::post('/changepassword', "UserController@changepassword");
 Route::get('/user-file/{id}', "UserController@userFile");
 Route::get('/user-profile/{id}', "UserController@userProfile");
 Route::get('/audio-photo/{id}', "UserController@audioPhoto");
@@ -72,6 +77,9 @@ Route::get('/user-login', function () {
 });
 Route::get('/user-signup', function () {
     return view('landing.user-signup');
+});
+Route::get('/forgot-password', function () {
+    return view('landing.forgot-password');
 });
 Route::get('/aboutus', function () {
     return view('landing.aboutus');

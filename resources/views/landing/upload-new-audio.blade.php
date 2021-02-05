@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Upload Audio File</label>
-                                <input type="file" class="form-control" name="audio[]" required style="color: white">
+                                <input type="file" class="form-control" name="audio[]" required >
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Upload Photo Associated with your Audio File</label>
-                                <input type="file" class="form-control" name="audioPhoto[]" required style="color: white">
+                                <input type="file" class="form-control" name="audioPhoto[]" required >
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Audio Title</label>
-                                <input type="text" class="form-control" placeholder="Audio Title" name="title" required style="color: white">
+                                <input type="text" class="form-control" placeholder="Audio Title" name="title" required>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Description</label>
-                                <textarea  class="form-control" placeholder="Describe your audio" name="description" style="color: white"></textarea>
+                                <textarea  class="form-control" placeholder="Describe your audio" name="description"></textarea>
                             </div>
                         </div>
                     </div>
@@ -54,9 +54,23 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Privacy</label>
-                                <select class="form-control" name="privacy" style="color: white">
+                                <select class="form-control" name="privacy">
                                     <option selected value="public">Public</option>
                                     <option value="private">Private</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <div class="input-with-icon">
+                                <label>Category</label>
+                                <select class="form-control" name="category">
+                                    <option selected value="music">Music</option>
+                                    <option value="podcasts">Podcasts</option>
+                                    <option value="radios">Radios</option>
+                                    <option value="playlists">Playlists</option>
                                 </select>
                             </div>
                         </div>

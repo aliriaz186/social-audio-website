@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Name</label>
-                                <input type="text" class="form-control" placeholder="Channel Name" name="name" required style="color: white">
+                                <input type="text" class="form-control" placeholder="Channel Name" name="name" required>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <label>Description</label>
-                                <textarea  class="form-control" placeholder="Describe your channel" name="description" style="color: white"></textarea>
+                                <textarea  class="form-control" placeholder="Describe your channel" name="description"></textarea>
                             </div>
                         </div>
                     </div>

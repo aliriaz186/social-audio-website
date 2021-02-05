@@ -20,7 +20,9 @@
         "laravel/ui": "^2.0",
         "maatwebsite/excel": "^3.1",
         "nunomaduro/laravel-desktop-notifier": "^2.4",
-        "twilio/sdk": "^6.11"
+        "phpmailer/phpmailer": "^6.2",
+        "twilio/sdk": "^6.11",
+        "firebase/php-jwt": "^5.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
